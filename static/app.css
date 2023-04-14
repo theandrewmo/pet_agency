@@ -1,0 +1,8 @@
+div {
+    padding: 5px;
+    margin: 5px;
+}
+
+img, a {
+    -webkit-user-drag: none;
+}

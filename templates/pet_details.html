@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block pet_details %}
+<div class="container d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+        <img src="{{pet.photo_url}}" alt="petimage">
+        <div class="card-body">
+            <h5 class="card-title">{{pet.name}}</h5>
+            <p class="card-text">Species: {{pet.species}}</p>
+            <p class="card-text">Age: {{pet.age}}</p>
+            <p class="card-text">Notes: {{pet.notes}}</p>
+            <p class="card-text">Status:
+                {% if pet.available %}
+                <span class="fw-bold">available! </span> 
+                {% else %}
+                not available!
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <form action="" method="POST">
+        <h3 class='text-center'>Edit</h3>
+        {{ form.hidden_tag() }}
+    
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <div class="form-group">
+            {{field.label}}
+            {% if field.name != 'available' %}
+                    {{field(class='form-control')}}
+                    {% else %}
+                    {{field(class='form-check-input')}}
+            {% endif %}
+            {% for error in field.errors %}
+            <small class="form-text text-danger">
+                {{ error }}
+            </small>
+            {% endfor %}
+            
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            <button class="btn btn-success btn-sm">Save Details</button>
+            <a href="/" class="btn btn-danger btn-sm">Cancel</a>
+        </div>
+    </form>
+</div>
+<div class="container d-flex justify-content-center">
+<a href="/" class="btn btn-primary">Home</a>
+</div>
+{% endblock %}

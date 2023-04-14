@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block pet_add_form%}
+<div class="container">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+    
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <div class="form-group">
+                {{field.label}}
+                {% if field.name != 'available' %}
+                    {{field(class='form-control')}}
+                    {% else %}
+                    {{field(class='form-check-input')}}
+                {% endif %}
+                {% for error in field.errors %}
+                <small class="form-text text-danger">
+                    {{ error }}
+                </small>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <button class="btn btn-success btn-sm">Add Pet</button>
+                <a href="/" class="btn btn-danger btn-sm">Cancel</a>
+            </div>
+    </form>
+</div>
+
+
+
+{% endblock %}
